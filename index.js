@@ -1,9 +1,16 @@
 require("dotenv").config();
 const express = require("express");
 const { DatabaseConnect } = require("./config/db");
+const { AdminRouter } = require("./routes/admin");
+const { UserRouter } = require("./routes/user");
+const { FreeRouter } = require("./routes/free");
 
 const app = express();
 app.use(express.json());
+
+app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/admin", AdminRouter);
+app.use("/api/v1/free", FreeRouter);
 
 // Start the server only if the database connection is successful
 const startServer = async () => {
